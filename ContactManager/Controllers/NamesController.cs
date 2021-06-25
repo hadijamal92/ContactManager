@@ -25,6 +25,18 @@ namespace ContactManager.Controllers
             return View(await _context.Name.ToListAsync());
         }
 
+        // GET: Names/ShowSearchForm
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View();
+        }
+
+        // POST: Names/ShowSearchResults
+        public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
+        {
+            return View("Index", await _context.Name.Where( j => j.FullName.Contains(SearchPhrase)).ToListAsync());
+        }
+
         // GET: Names/Details/5
         public async Task<IActionResult> Details(int? id)
         {
